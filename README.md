@@ -12,10 +12,12 @@ RiskManagementContext. PortfolioContext est responsable de la récupération des
 données de marché et de la création d'un portefeuille, tandis que
 RiskManagementContext est responsable du calcul du risque global du
 portefeuille.
-Le système utilise également un modèle de repository pour accéder aux données
-de portefeuille et de marché. En outre, le système utilise la programmation
-asynchrone pour améliorer les performances lors de la récupération des données
-de marché.
+
+Le système utilise également un modèle d'entrepôts (repository) pour accéder
+aux données de portefeuille et de marché. En outre, le système utilise la
+programmation asynchrone pour améliorer les performances lors de la
+récupération des données de marché.
+
 Pour utiliser le système, l'utilisateur peut simplement créer une instance de
 ApplicationContext et appeler la méthode calculate_portfolio_risk sur son
 RiskManagementContext. Le système retournera alors une estimation du risque
@@ -93,7 +95,7 @@ Lisez le code suivant avant de répondre les questions
 
 8. Quel est le but de l'instruction "if name == 'main'"?
 
-9. Comment mettre la tâche update_market_data() au fond ?
+9. Comment met-on la tâche update_market_data() au fond ?
 
 ## Section 2: Flask RestX
 
@@ -142,7 +144,7 @@ En utilisant la conception en Domain Driven Design (DDD), nous pouvons
 identifier les différents objets qui sont impliqués dans le processus et les
 organiser en fonction de leur rôle. Voici les étapes du développement en DDD :
 
-1. Identifier et classifier les éléments dans DDD
+1. Identifiez et classifiez les éléments dans DDD
 
     * Symbole (Symbol) : représente le symbole de l'actif financier (ex: AAPL
       pour Apple et GOOGL pour Google)
@@ -203,7 +205,7 @@ organiser en fonction de leur rôle. Voici les étapes du développement en DDD 
    import asyncio
    ```
 
-3. Implémenter les objets de valeur (values.py) et les objets d’entité
+3. Implémentez les objets de valeur (values.py) et les objets d’entité
    (entities.py) dont par ailleurs, une interface est demandée à compléter :
 
    ```
@@ -221,7 +223,7 @@ organiser en fonction de leur rôle. Voici les étapes du développement en DDD 
 
    ```
 
-4. Compléter la classe Portfolio (aggregates.py)
+4. Complétez la classe Portfolio (aggregates.py)
 
    ```
    @dataclass
@@ -232,7 +234,7 @@ organiser en fonction de leur rôle. Voici les étapes du développement en DDD 
            # to do
    ```
 
-5. Compléter la classe MarketDataFactory (factories.py)
+5. Complétez la classe MarketDataFactory (factories.py)
 
    ```
    class MarketDataFactory:
@@ -241,7 +243,7 @@ organiser en fonction de leur rôle. Voici les étapes du développement en DDD 
            #  to do
    ```
 
-6. Créer une propriété portfolio du récupérateur de données de portefeuille
+6. Créez une propriété portfolio du récupérateur de données de portefeuille
    ainsi que celle de db_connector (repositories.py)
 
    ```
@@ -260,7 +262,7 @@ organiser en fonction de leur rôle. Voici les étapes du développement en DDD 
 
    ```
 
-7. Compléter la classe MarketDataRepository (repositories.py)
+7. Complétez la classe MarketDataRepository (repositories.py)
    ```
    class MarketDataRepository:
        @classmethod
@@ -273,7 +275,7 @@ organiser en fonction de leur rôle. Voici les étapes du développement en DDD 
                 volume=response_json['volume'])
    ```
 
-8. Compléter la classe MarketDataService (services.py)
+8. Complétez la classe MarketDataService (markeet_data.py)
 
    ```
    class MarketDataService:
@@ -285,7 +287,7 @@ organiser en fonction de leur rôle. Voici les étapes du développement en DDD 
            #  to do by calling self.get_market_data
    ```
 
-9. Compléter la classe PortfolioContext (contexts.py) en supposant que
+9. Complétez la classe PortfolioContext (contexts.py) en supposant que
 
    ```
    # Evénements
@@ -323,7 +325,7 @@ organiser en fonction de leur rôle. Voici les étapes du développement en DDD 
            return self.portfolio.total_weight()
    ```
 
-10. Compléter la classe RiskManagementContext (contexts.py)
+10. Complétez la classe RiskManagementContext (contexts.py)
 
     ```
     class RiskManagementContext:
@@ -334,7 +336,7 @@ organiser en fonction de leur rôle. Voici les étapes du développement en DDD 
            #  to do
     ```
 
-11. Compléter la classe ApplicationContext (contexts.py) pour que l'on puisse
+11. Complétez la classe ApplicationContext (contexts.py) pour que l'on puisse
     exécuter asyncio.run(ApplicationContext().run())
 
     ```
@@ -362,3 +364,101 @@ organiser en fonction de leur rôle. Voici les étapes du développement en DDD 
              #  to do
     ```
 
+
+
+
+
+
+
+
+Annexes :
+Structure arborescente du code :
+
+```
+|-- solutions
+|   |-- __init__.py
+|   |-- applications
+|   |   |-- __init__.py
+|   |   |-- globals
+|   |   |   |-- __init__.py
+|   |   |   `-- contexts.py
+|   |   |-- market_data
+|   |   |   |-- __init__.py
+|   |   |   |-- events.py
+|   |   |   `-- repositories.py
+|   |   |-- portfolios
+|   |   |   |-- __init__.py
+|   |   |   |-- contexts.py
+|   |   |   |-- events.py
+|   |   |   |-- factories.py
+|   |   |   `-- repositories.py
+|   |   `-- risks
+|   |       |-- __init__.py
+|   |       `-- contexts.py
+|   |-- domains
+|   |   |-- __init__.py
+|   |   |-- models
+|   |   |   |-- __init__.py
+|   |   |   |-- aggregates.py
+|   |   |   |-- entities.py
+|   |   |   `-- values.py
+|   |   `-- services
+|   |       |-- __init__.py
+|   |       `-- market_data.py
+|   `-- infrastructures
+|   |   |-- __init__.py
+|   |   |-- main.py
+|   |   |-- external_services
+|   |   |   |-- __init__.py
+|   |   |   `-- market_data_sqlite3.py
+|   |   `-- internal_services
+|   |       |-- __init__.py
+|   |       `-- market_data_restx_api.py
+|   `-- utils
+|       |-- __init__.py
+|       |-- datetimes.py
+|       |-- loggers.py
+|       `-- numbers.py
+`-- tests
+    |-- __init__.py
+    |-- applications
+    |   |-- __init__.py
+    |   |-- globals
+    |   |   |-- __init__.py
+    |   |   `-- test_contexts.py
+    |   |-- market_data
+    |   |   |-- __init__.py
+    |   |   |-- test_events.py
+    |   |   `-- test_repositories.py
+    |   |-- portfolios
+    |   |   |-- __init__.py
+    |   |   |-- test_contexts.py
+    |   |   |-- test_events.py
+    |   |   |-- test_factories.py
+    |   |   `-- test_repositories.py
+    |   `-- risks
+    |       `-- test_contexts.py
+    |-- domains
+    |   |-- __init__.py
+    |   |-- models
+    |   |   |-- __init__.py
+    |   |   |-- test_aggregates.py
+    |   |   |-- test_entities.py
+    |   |   `-- test_values.py
+    |   `-- services
+    |   |   |-- __init__.py
+    |       `-- test_market_data.py
+    |-- infrastructures
+    |   |-- __init__.py
+    |   |-- external_services
+    |   |   |-- __init__.py
+    |   |   `-- test_market_data_sqlite3.py
+    |   `-- internal_services
+    |   |   |-- __init__.py
+    |       `-- test_market_data_restx_api.py
+    `-- utils
+        |-- __init__.py
+        |-- test_datetimes.py
+        |-- test_loggers.py
+        `-- test_numbers.py
+```
