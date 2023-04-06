@@ -23,6 +23,7 @@ market_data_model = api.model('MarketData', {
 
 
 @ns.route('/<string:symbol>')
+@api.response(404, 'Aucune donnée pour le symbole')
 class MarketData(Resource):
     name = 'Market Data'
 
