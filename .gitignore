@@ -1,0 +1,24 @@
+# Compiled Python files
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+Pipfile
+Pipfile.lock
+
+# Log files
+*.log
+
+# IDE files
+.idea/
+*.DS_Store
+
+# Package files
+*.egg-info/
+dist/
+build/
+
+# Local configuration files
+config.json
+secrets.py
