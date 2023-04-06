@@ -24,7 +24,7 @@ RiskManagementContext. Le système retournera alors une estimation du risque
 global du portefeuille basée sur les données de marché récupérées pour chaque
 actif et leurs pondérations respectives.
 
-## Section 1: Threading
+## Section 1 : Threading
 
 Lisez le code suivant avant de répondre les questions
 
@@ -97,7 +97,9 @@ Lisez le code suivant avant de répondre les questions
 
 9. Comment met-on la tâche update_market_data() au fond ?
 
-## Section 2: Flask RestX
+Le code complet est dans le module market_data_sqlite3.py
+
+## Section 2 : Flask RestX
 
 Nous créons un module qui implémente une API Flask pour récupérer des données
 de marché pour une entreprise spécifique. Il utilise SQLite pour stocker les
@@ -111,6 +113,8 @@ L'API utilise également Flask RestX pour définir un modèle pour les données 
 marché, qui comprend les champs 'symbol', 'price' et 'volume'. Ce modèle est
 utilisé pour valider les données d'entrée et pour fournir une documentation
 claire de l'API.
+
+Nous créons un module market_data_restx_api.py
 
 1. Importez les modules nécessaires : sqlite3, Flask, et flask_restx.
 
@@ -143,6 +147,7 @@ financiers tels que des actions ou des devises.
 En utilisant la conception en Domain Driven Design (DDD), nous pouvons
 identifier les différents objets qui sont impliqués dans le processus et les
 organiser en fonction de leur rôle. Voici les étapes du développement en DDD :
+(N.B. n'oubliez pas les mises à jour chez les tests unitaires)
 
 1. Identifiez et classifiez les éléments dans DDD
 
@@ -364,14 +369,8 @@ organiser en fonction de leur rôle. Voici les étapes du développement en DDD 
              #  to do
     ```
 
+## Annexes :
 
-
-
-
-
-
-
-Annexes :
 Structure arborescente du code :
 
 ```
