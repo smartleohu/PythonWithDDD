@@ -9,14 +9,6 @@ class PortfolioRepository:
         self._db_connector = db_connector
         self._portfolio = self.get()
 
-    @property
-    def portfolio(self):
-         # to do
-
-    @property
-    def db_connector(self):
-         # to do
-
     def get(self):
         logger.info("DB Connection for Portfolio fetch")
         logger.debug(self.db_connector or "Mock Portfolio from DB")
