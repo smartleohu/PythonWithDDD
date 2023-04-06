@@ -1,8 +1,9 @@
-import asyncio
 import threading
 
-from solutions.infrastructures.external_services.market_data_sqlite3 import update_market_data
-from solutions.infrastructures.internal_services.market_data_restx_api import app
+from solutions.infrastructures.external_services.market_data_sqlite3 import \
+    update_market_data
+from solutions.infrastructures.internal_services.market_data_restx_api import \
+    app
 
 if __name__ == '__main__':
     t_event = threading.Event()
