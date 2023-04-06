@@ -212,7 +212,7 @@ organiser en fonction de leur rôle. Voici les étapes du développement en DDD 
    from dataclasses import dataclass, field
 
    from .values import Price, Symbol, Weight, Volume
-   from ..utils.numbers import get_id
+   from ...utils.numbers import get_id
 
    @dataclass
    class Entity:
@@ -275,16 +275,13 @@ organiser en fonction de leur rôle. Voici les étapes du développement en DDD 
                 volume=response_json['volume'])
    ```
 
-8. Complétez la classe MarketDataService (markeet_data.py)
+8. Complétez la classe MarketDataService (market_data.py)
 
    ```
    class MarketDataService:
        @classmethod
-       async def get_market_data(self, session, symbol):
-           #  to do
-   
-       async def get_market_data_for_assets(self, assets):
-           #  to do by calling self.get_market_data
+       async def get_market_data_for_assets(cls, assets):
+           # to do
    ```
 
 9. Complétez la classe PortfolioContext (contexts.py) en supposant que
@@ -302,6 +299,9 @@ organiser en fonction de leur rôle. Voici les étapes du développement en DDD 
    
    class PortfolioContext:
        def __init__(self, portfolio_repository: PortfolioRepository,
+                 market_data_service: MarketDataService,
+                 market_data_factory: MarketDataFactory,
+                 market_data_fetched_handler):
             #  to do 
    
        async def fetch_market_data(self):
