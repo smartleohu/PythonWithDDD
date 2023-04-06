@@ -10,6 +10,9 @@ Pipfile.lock
 # Log files
 *.log
 
+# db files
+*.db
+
 # IDE files
 .idea/
 *.DS_Store

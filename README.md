@@ -122,7 +122,8 @@ Nous créons un module market_data_restx_api.py
 
 3. Créez une instance de l'API avec une version, un titre et une description.
 
-4. Créez un namespace pour les endpoints de l'API pour les données de marché.
+4. Créez un namespace pour les endpoints de l'API internes pour les données de
+   marché.
 
 5. Définissez un modèle pour les données de marché avec les champs 'symbol', '
    price' et 'volume'.

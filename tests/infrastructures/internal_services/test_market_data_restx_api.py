@@ -51,7 +51,7 @@ class TestWebServices:
         monkeypatch.setattr(MarketData, 'get_market_data',
                             mock_get_market_data)
 
-        response = client.get('/marketdata/AAPL')
+        response = client.get('/internal/marketdata/AAPL')
         assert response.status_code == 200
         assert response.json == mock_data
 
@@ -63,11 +63,12 @@ class TestWebServices:
         monkeypatch.setattr(MarketData, 'get_market_data',
                             mock_get_market_data)
 
-        response = client.get('/marketdata/MSFT')
+        response = client.get('/internal/marketdata/MSFT')
         assert response.status_code == 404
         assert response.json == {
-            'message': 'Aucune donnée pour le symbole MSFT. You have '
-                       'requested this URI [/marketdata/MSFT] but did you '
-                       'mean /marketdata/<string:symbol> ?'}
+            'message': 'Aucune donnée pour le symbole MSFT. '
+                       'You have requested this URI [/internal/'
+                       'marketdata/MSFT] but did you mean /'
+                       'internal/marketdata/<string:symbol> ?'}
 
         mock_get_market_data.assert_called_once_with('MSFT')

@@ -9,8 +9,8 @@ app: Flask = Flask(__name__)
 api = Api(app, version='1.0', title='Market Data API',
           description='API pour récupérer les données de marché')
 
-ns = api.namespace('marketdata',
-                   description='Endpoints pour les données de marché')
+ns = api.namespace('internal', path='/internal',
+                   description='Endpoints internes pour les données de marché')
 
 market_data_model = api.model('MarketData', {
     'symbol': fields.String(required=True,
@@ -22,7 +22,7 @@ market_data_model = api.model('MarketData', {
 })
 
 
-@ns.route('/<string:symbol>')
+@ns.route('/marketdata/<string:symbol>')
 @api.response(404, 'Aucune donnée pour le symbole')
 class MarketData(Resource):
     name = 'Market Data'
