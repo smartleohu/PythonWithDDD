@@ -66,6 +66,8 @@ class TestWebServices:
         response = client.get('/marketdata/MSFT')
         assert response.status_code == 404
         assert response.json == {
-            'message': 'Aucune donnée pour le symbole MSFT'}
+            'message': 'Aucune donnée pour le symbole MSFT. You have '
+                       'requested this URI [/marketdata/MSFT] but did you '
+                       'mean /marketdata/<string:symbol> ?'}
 
         mock_get_market_data.assert_called_once_with('MSFT')

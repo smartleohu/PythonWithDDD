@@ -40,11 +40,16 @@ class MarketData(Resource):
             return None
         return {'symbol': data[0], 'price': data[1], 'volume': data[2]}
 
+    @api.doc(responses={
+        200: 'Success',
+        404: 'Data not found'
+    })
+    @ns.marshal_with(market_data_model)
     def get(self, symbol):
         print(self.name)
         data = self.get_market_data(symbol)
         if not data:
-            return {'message': f'Aucune donnée pour le symbole {symbol}'}, 404
+            api.abort(404, f"Aucune donnée pour le symbole {symbol}")
         return data, 200
 
 
